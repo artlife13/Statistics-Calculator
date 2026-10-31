@@ -25,7 +25,7 @@ def central_tendency():
         data = [float(x) for x in input("Enter the data separated by spaces: ").split()]
         return statistics.mean(data)
     elif choice == 2:
-        weighted_mean()
+        return weighted_mean()
     elif choice == 3:
         data = [float(x) for x in input("Enter the data separated by spaces: ").split()]
         return statistics.median(data)
