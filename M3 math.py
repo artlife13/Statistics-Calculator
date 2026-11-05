@@ -18,11 +18,12 @@ while loop == True:
         - Sample Standard Deviation
         - Population Standard Deviation
     3. Measures of Position
-        - Sample Z-Score
-        - Population Z-Score
-        - Percentile
+        - Z-Score (Mean and Standard Deviation are already given)
+        - Z-Score (Calculate from raw data)
+        - Percentile Rank of a Value (Score -> Percentile)
+        - Value at a Percentile (Percentile -> Score)
     4. Chi Square
-        - Test Value
+        - Test Value (Testing Variance / Standard Deviation)
         - Critical Value
     5. Correlation and Regression
         - Correlartion Coefficient

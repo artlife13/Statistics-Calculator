@@ -66,27 +66,40 @@ def variation():
 
 def position():
     print("Position Options:")
-    print("1. Sample Z-Score")
-    print("2. Population Z-Score")
-    print("3. Percentile")
-    choice = int(input("Enter your choice (1-3): "))
+    print("1. Z-Score (Mean and Std Dev given)")
+    print("2. Z-Score (From raw data)")
+    print("3. Percentile Rank of a Value (Score -> Percentile)")
+    print("4. Value at a Percentile (Percentile -> Score)")
+    choice = int(input("Enter your choice (1-4): "))
 
     if choice == 1:
-        data = [float(x) for x in input("Enter the data separated by spaces: ").split()]
-        value = float(input("Enter the value to calculate Z-Score for: "))
-        mean = statistics.mean(data)
-        stdev = statistics.stdev(data)
-        return (value - mean) / stdev
+        x = float(input("Enter the value (X): "))
+        mean = float(input("Enter the mean: "))
+        stdev = float(input("Enter the standard deviation: "))
+        return (x - mean) / stdev
+
     elif choice == 2:
-        data = [float(x) for x in input("Enter the data separated by spaces: ").split()]
+        data_type = input("Is this a Sample or Population? (s/p): ").strip().lower()
+        data = [float(x) for x in input("Enter the data separated by spaces: ").replace(",", " ").split()]
         value = float(input("Enter the value to calculate Z-Score for: "))
         mean = statistics.mean(data)
-        stdev = statistics.pstdev(data)
+        stdev = statistics.stdev(data) if data_type == 's' else statistics.pstdev(data)
         return (value - mean) / stdev
+
     elif choice == 3:
-        data = [float(x) for x in input("Enter the data separated by spaces: ").split()]
+        data = [float(x) for x in input("Enter the data separated by spaces: ").replace(",", " ").split()]
+        value = float(input("Enter the score/value to find the percentile rank for: "))
+        
+        count_below = sum(1 for x in data if x < value)
+        n = len(data)
+        percentile_rank = ((count_below + 0.5) / n) * 100
+        return f"{percentile_rank:.1f}th percentile"
+
+    elif choice == 4:
+        data = [float(x) for x in input("Enter the data separated by spaces: ").replace(",", " ").split()]
         percentile = float(input("Enter the percentile (0-100): "))
-        return statistics.quantiles(data, n=100)[int(percentile)-1]
+        return statistics.quantiles(data, n=100)[int(percentile) - 1]
+
     else:
         print("Invalid choice. Please try again.")
-        position()
+        return position()
